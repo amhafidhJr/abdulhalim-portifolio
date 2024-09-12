@@ -1,6 +1,27 @@
+/* Add to index.css or App.css */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+
 .App {
   text-align: center;
 }
+
+body,
+* {
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.blog-post {
+  font-family: "VT323", monospace;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 20px;
+}
+
 
 .App-logo {
   height: 40vmin;
@@ -32,7 +53,19 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+:root {
+  --bsb-overlay-opacity: 0.5;
+  --bsb-overlay-bg-color: rgba(255, 255, 255, 0.5);
+}
+
+.bsb-overlay {
+  position: relative;
+  background-color: var(--bsb-overlay-bg-color);
+  opacity: var(--bsb-overlay-opacity);
 }
