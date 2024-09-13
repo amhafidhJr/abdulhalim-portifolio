@@ -12,16 +12,13 @@ import {
 } from "@mui/material";
 import { Email as EmailIcon, Phone as PhoneIcon } from "@mui/icons-material";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { format } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
 
 const generateUniqueId = () => {
   return uuidv4();
 };
 
 const ContactForm = () => {
-  const date = format(new Date(), "dd/MM/yyyy");
   const [contactForm, setContactForm] = useState({
     id: generateUniqueId(),
     fullname: "",

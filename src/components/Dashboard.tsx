@@ -13,8 +13,6 @@ import {
 import {
   Calculate as CalculateIcon,
   Book as BookIcon,
-  Science as ScienceIcon,
-  Videocam as VideocamIcon,
   ArrowForward as ArrowForwardIcon,
 } from "@mui/icons-material";
 

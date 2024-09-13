@@ -14,7 +14,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import { BlogPost } from "../interfaces/BlogPost";
-import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
 const posts = [
@@ -161,7 +160,7 @@ const BlogPostDetails = () => {
             <img
               src="https://www.regalafricansafaris.com/wp-content/uploads/2023/09/Where-to-stay-in-Zanzibar-1200x480.jpg"
               className="card-img-top"
-              alt="Blog post image"
+              alt="Blog post"
               style={{
                 height: "300px",
               }}

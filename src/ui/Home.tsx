@@ -3,7 +3,6 @@ import { AppBarUI } from "../components/AppBar.tsx";
 import { About } from "../components/About.tsx";
 import Project from "../components/Project.tsx";
 import { Skills } from "../components/Skills.tsx";
-import { Blog } from "../components/Blog.tsx";
 import { Footer } from "../components/Footer.tsx";
 
 export const Home = () => {

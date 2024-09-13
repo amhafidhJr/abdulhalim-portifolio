@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -10,8 +9,6 @@ import {
   Pagination,
   Typography,
 } from "@mui/material";
-import { format } from "date-fns";
-import { BlogPost } from "../interfaces/BlogPost";
 import { Link } from "react-router-dom";
 
 const posts = [
@@ -122,7 +119,7 @@ const getFirstParagraph = (htmlString: string | null) => {
 };
 
 export const Blog = () => {
-  const [blogData, setBlogData] = useState<BlogPost[]>([]);
+  // const [blogData, setBlogData] = useState<BlogPost[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 9; // Number of posts per page
 
@@ -231,7 +228,7 @@ export const Blog = () => {
         >
           <div className="col-md-12 col-lg-12 col-sm-12 text-center d-flex justify-content-center align-items-center">
             <Pagination
-              count={Math.ceil(blogData.length / postsPerPage)}
+              count={Math.ceil(posts.length / postsPerPage)}
               variant="outlined"
               shape="rounded"
               color="secondary"

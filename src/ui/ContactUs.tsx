@@ -1,6 +1,5 @@
 import React from "react";
 import { AppBarUI } from "../components/AppBar.tsx";
-import { Blog } from "../components/Blog.tsx";
 import { Footer } from "../components/Footer.tsx";
 import ContactForm from "../components/Contact.tsx";
 

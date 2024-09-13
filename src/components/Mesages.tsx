@@ -13,21 +13,12 @@ import {
   IconButton,
   Snackbar,
   TextField,
-  Typography,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { Message } from "../interfaces/Message";
-import {
-  OpenInBrowser,
-  OpenInFull,
-  OpenWith,
-  ViewAgenda,
-  ViewCarousel,
-  ViewComfy,
-  Visibility,
-} from "@mui/icons-material";
+import { Visibility } from "@mui/icons-material";
 
 const paginationModel = { page: 0, pageSize: 10 };
 
@@ -81,8 +72,6 @@ export const MessageList = () => {
   );
 
   const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {};
 
   const handleClose = () => {
     setOpen(false);

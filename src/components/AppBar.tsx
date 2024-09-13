@@ -51,8 +51,8 @@ const pages = [
 const settings = ["Login"];
 
 export const AppBarUI = () => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [dialogOpen, setDialogOpen] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -95,21 +95,21 @@ export const AppBarUI = () => {
     navigate("/dashboard");
   };
 
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
+  // const handleCloseDialog = () => {
+  //   setDialogOpen(false);
+  // };
 
-  const handleLogin = (username: string, password: string) => {
-    setIsLoggedIn(true);
-    setDialogOpen(false);
-    alert("Login successful!");
-    navigate("/dashboard");
-    settings[0] = "Logout";
-  };
+  // const handleLogin = (username: string, password: string) => {
+  //   setIsLoggedIn(true);
+  //   setDialogOpen(false);
+  //   alert("Login successful!");
+  //   navigate("/dashboard");
+  //   settings[0] = "Logout";
+  // };
 
-  if (isLoggedIn) {
-    return <div>Welcome to the Dashboard!</div>;
-  }
+  // if (isLoggedIn) {
+  //   return <div>Welcome to the Dashboard!</div>;
+  // }
 
   return (
     <>
