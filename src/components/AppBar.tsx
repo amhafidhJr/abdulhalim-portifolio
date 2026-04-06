@@ -1,220 +1,219 @@
-import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
+import React, { useState, useEffect } from "react";
+import { Box, Container, IconButton, Typography, Button, Menu, MenuItem, Tooltip, Avatar } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import { makeStyles } from "@mui/styles"; // Import from @mui/styles
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu as MenuIcon, X, User } from "lucide-react";
 
 // Your brand image
 const Brand = require("../assets/images/brand.png");
-
-const useStyles = makeStyles((theme) => ({
-  navLink: {
-    color: "white",
-    textDecoration: "none",
-    fontSize: "20px",
-  },
-  activeLink: {
-    color: "#ffc658", // Change this to your preferred active link color
-    fontWeight: "bold",
-  },
-}));
-
-const useStylesForMobile = makeStyles((theme) => ({
-  navLink: {
-    color: "black",
-    textDecoration: "none",
-    fontSize: "20px",
-  },
-  activeLink: {
-    color: "#ffc658", // Change this to your preferred active link color
-    fontWeight: "bold",
-  },
-}));
 
 const pages = [
   { name: "Home", path: "/" },
   { name: "Blog", path: "/blog" },
   { name: "Contacts", path: "/contact-us" },
-  { name: "Resume", path: "/resume" }, // Fixed path
+  { name: "Resume", path: "/resume" },
 ];
 
 const settings = ["Login"];
 
 export const AppBarUI = () => {
-  // const [dialogOpen, setDialogOpen] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const classes = useStyles();
-  const classesForMobile = useStylesForMobile();
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = (path: string) => {
-    if (path === "/resume") {
-      handleDownloadResume();
-    } else {
-      navigate(path);
-    }
-    setAnchorElNav(null);
-  };
-
   const handleCloseUserMenu = (setting: string) => {
     if (setting === "Login") {
-      handleOpenDialog();
+      navigate("/dashboard");
     }
     setAnchorElUser(null);
   };
 
-  const handleDownloadResume = () => {
-    const link = document.createElement("a");
-    link.href = "/pdfs/Abdulhalim CV.pdf";
-    link.download = "Abdulhalim CV.pdf";
-    link.click();
+  const handleNavClick = (path: string) => {
+    if (path === "/resume") {
+      const link = document.createElement("a");
+      link.href = "/pdfs/Abdulhalim CV.pdf";
+      link.download = "Abdulhalim CV.pdf";
+      link.click();
+    } else {
+      navigate(path);
+    }
+    setMobileMenuOpen(false);
   };
-
-  const handleOpenDialog = () => {
-    navigate("/dashboard");
-  };
-
-  // const handleCloseDialog = () => {
-  //   setDialogOpen(false);
-  // };
-
-  // const handleLogin = (username: string, password: string) => {
-  //   setIsLoggedIn(true);
-  //   setDialogOpen(false);
-  //   alert("Login successful!");
-  //   navigate("/dashboard");
-  //   settings[0] = "Logout";
-  // };
-
-  // if (isLoggedIn) {
-  //   return <div>Welcome to the Dashboard!</div>;
-  // }
 
   return (
-    <>
-      <AppBar position="static" sx={{ backgroundColor: "#776B5D" }}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            {/* Mobile menu */}
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="open navigation menu"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        padding: "20px 0",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Box
+          className={`glass ${isScrolled ? "scrolled" : ""}`}
+          sx={{
+            borderRadius: "100px",
+            px: 3,
+            py: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            transition: "all 0.3s ease",
+            ...(isScrolled && {
+              py: 0.5,
+              background: "rgba(10, 10, 12, 0.85)",
+              border: "1px solid rgba(99, 102, 241, 0.2)",
+            }),
+          }}
+        >
+          {/* Logo */}
+          <Box
+            sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+            onClick={() => navigate("/")}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 800,
+                letterSpacing: "-1px",
+                fontSize: "1.5rem",
+                mr: 2,
+              }}
+              className="text-gradient"
+            >
+              HALIM.
+            </Typography>
+          </Box>
+
+          {/* Desktop Nav */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
+            {pages.map((page) => (
+              <NavLink
+                key={page.name}
+                to={page.path}
+                onClick={(e) => {
+                  if (page.path === "/resume") {
+                    e.preventDefault();
+                    handleNavClick(page.path);
+                  }
+                }}
+                style={({ isActive }) => ({
+                  color: isActive ? "var(--primary)" : "var(--text-muted)",
+                  textDecoration: "none",
+                  padding: "8px 16px",
+                  borderRadius: "20px",
+                  fontSize: "0.95rem",
+                  fontWeight: 500,
+                  transition: "all 0.2s ease",
+                })}
               >
-                <MenuIcon />
+                {page.name}
+              </NavLink>
+            ))}
+          </Box>
+
+          {/* Actions */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Tooltip title="Profile">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0.5, border: "1px solid var(--border-glass)" }}>
+                <Avatar sx={{ width: 32, height: 32, bgcolor: "var(--primary)" }}>
+                   <User size={18} />
+                </Avatar>
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                keepMounted
-                transformOrigin={{ vertical: "top", horizontal: "left" }}
-                open={Boolean(anchorElNav)}
-                onClose={() => setAnchorElNav(null)}
-                sx={{ display: { xs: "block", md: "none" } }}
-              >
-                {pages.map((page) => (
-                  <MenuItem
-                    key={page.name}
-                    onClick={() => handleCloseNavMenu(page.path)}
-                  >
-                    <Typography textAlign="center" className="text-dark">
-                      <NavLink
-                        to={page.path}
-                        className={({ isActive }) =>
-                          isActive
-                            ? `${classesForMobile.navLink} ${classesForMobile.activeLink}`
-                            : classesForMobile.navLink
-                        }
-                      >
-                        {page.name}
-                      </NavLink>
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-
-            {/* Desktop menu */}
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page.name}
-                  onClick={() => handleCloseNavMenu(page.path)}
-                  sx={{ my: 2, display: "block" }}
-                >
-                  <NavLink
-                    to={page.path}
-                    className={({ isActive }) =>
-                      isActive
-                        ? `${classes.navLink} ${classes.activeLink}`
-                        : classes.navLink
-                    }
-                  >
-                    {page.name}
-                  </NavLink>
-                </Button>
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              anchorEl={anchorElUser}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              keepMounted
+              transformOrigin={{ vertical: "top", horizontal: "right" }}
+              open={Boolean(anchorElUser)}
+              onClose={() => setAnchorElUser(null)}
+              PaperProps={{
+                className: "glass",
+                sx: { mt: 1.5, minWidth: 150, borderRadius: "12px", color: "var(--text-main)" }
+              }}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
               ))}
-            </Box>
+            </Menu>
 
-            {/* User menu */}
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Brand Logo" src={Brand} />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                keepMounted
-                transformOrigin={{ vertical: "top", horizontal: "right" }}
-                open={Boolean(anchorElUser)}
-                onClose={() => setAnchorElUser(null)}
+            {/* Mobile Menu Toggle */}
+            <IconButton
+              sx={{ display: { md: "none" }, color: "var(--text-main)" }}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X /> : <MenuIcon />}
+            </IconButton>
+          </Box>
+        </Box>
+      </Container>
+
+      {/* Mobile Nav Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="glass"
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: "24px",
+              right: "24px",
+              marginTop: "12px",
+              borderRadius: "24px",
+              padding: "20px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+            }}
+          >
+            {pages.map((page) => (
+              <Button
+                key={page.name}
+                fullWidth
+                onClick={() => handleNavClick(page.path)}
+                sx={{
+                  color: "var(--text-main)",
+                  justifyContent: "flex-start",
+                  borderRadius: "12px",
+                  py: 1.5,
+                  '&:hover': {
+                    background: "rgba(255,255,255,0.05)",
+                    color: "var(--primary)"
+                  }
+                }}
               >
-                {settings.map((setting) => (
-                  <MenuItem
-                    key={setting}
-                    onClick={() => handleCloseUserMenu(setting)}
-                  >
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-
-      {/* Example dialog for login */}
-      {/* <LoginDialog open={dialogOpen} onClose={handleCloseDialog} onLogin={handleLogin} /> */}
-    </>
+                {page.name}
+              </Button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };

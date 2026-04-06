@@ -1,13 +1,13 @@
 import React from "react";
 import { AppBarUI } from "../components/AppBar.tsx";
 import { Footer } from "../components/Footer.tsx";
-import { MessageList } from "../components/Messages.tsx";
+import { ProjectForm } from "../components/ProjectForm.tsx";
 
-export const MessageUi = () => {
+export const ProjectFormUi = () => {
   return (
     <>
       <AppBarUI />
-      <MessageList />
+      <ProjectForm />
       <Footer />
     </>
   );

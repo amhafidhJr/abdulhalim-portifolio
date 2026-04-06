@@ -1,0 +1,84 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "title": "MjasiriHub",
+      "subtitle": "Entrepreneurial Platform",
+      "description": "A comprehensive venture management platform designed to catalyze startup growth through integrated resource planning and collaborative ecosystems.",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426",
+      "tech": ["React", "Firebase", "Node.js", "Express", "Native"],
+      "github": "https://github.com/amhafidhJr",
+      "demo": "https://github.com/amhafidhJr"
+    },
+    {
+      "id": "2",
+      "title": "Najah eMarket",
+      "subtitle": "Enterprise E-Commerce",
+      "description": "Multi-vendor digital marketplace engine with real-time inventory synchronization and advanced search capabilities.",
+      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=2072",
+      "tech": ["Next.js", "MongoDB", "Redux", "Stripe"],
+      "github": "https://github.com/amhafidhJr",
+      "demo": "https://github.com/amhafidhJr"
+    },
+    {
+      "id": "3",
+      "title": "Inventory MS",
+      "subtitle": "Supply Chain Intelligence",
+      "description": "Proprietary inventory management system designed to optimize logistics and warehouse operations through data visualization.",
+      "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2070",
+      "tech": ["Angular", "MySQL", "Chart.js", "PHP"],
+      "github": "https://github.com/amhafidhJr",
+      "demo": "https://github.com/amhafidhJr"
+    },
+    {
+      "id": "4",
+      "title": "Water Trucker",
+      "subtitle": "Logistics & Tracking",
+      "description": "Real-time fleet monitoring and delivery optimization platform for the bulk water distribution industry.",
+      "image": "https://images.unsplash.com/photo-1519389950473-acc7b9684601?auto=format&fit=crop&q=80&w=2070",
+      "tech": ["Vue.js", "PostgreSQL", "Socket.io", "Docker"],
+      "github": "https://github.com/amhafidhJr",
+      "demo": "https://github.com/amhafidhJr"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "92ee5b33-105c-48a0-b77b-58ae3e02a7c5",
+      "title": "Digital Architecture in 2024",
+      "date": "Mar 15, 2024",
+      "author": "Abdulhalim Hafidh",
+      "readTime": "12 min",
+      "excerpt": "Exploring the core principles behind the 'True Premium' aesthetic and why senior engineers are moving towards achromatic palettes.",
+      "content": [
+        "The landscape of web development is shifting towards high-fidelity, performance-first architectures. As we move further into 2024, the demand for 'invisible' design—where the user interface serves the content with absolute precision—has never been higher.",
+        "Minimalism is no longer just about white space; it is about technical excellence. It's about how a layout responds to the user, how typography scales with intent, and how the underlying infrastructure supports a seamless experience.",
+        "In this article, we explore the core principles behind the 'True Premium' aesthetic and why senior engineers are moving towards achromatic palettes and hairline-thin UI elements."
+      ]
+    },
+    {
+      "id": "7b630ad1-e608-4af9-9f5f-4392a11e0d03",
+      "title": "The Future of Full Stack",
+      "date": "Mar 10, 2024",
+      "author": "Abdulhalim Hafidh",
+      "readTime": "8 min",
+      "excerpt": "A deep dive into server-side rendering, edge computing, and how modern frameworks are blurring the lines between frontend and backend.",
+      "content": [
+        "The evolution of full-stack development is moving at an unprecedented pace.",
+        "Server-side rendering has returned as a dominant pattern, not as a step back, but as a sophisticated way to deliver performance.",
+        "Edge computing is bringing logic closer to the user, reducing latency and enabling new possibilities for real-time applications."
+      ]
+    },
+    {
+      "id": "f7eaf393-ddac-4324-84bf-f14bd55fbfbf",
+      "title": "Modern Engineering Aesthetics",
+      "date": "Mar 05, 2024",
+      "author": "Abdulhalim Hafidh",
+      "readTime": "10 min",
+      "excerpt": "How to design interfaces that feel technically precise and premium without sacrificing usability.",
+      "content": [
+        "Engineering aesthetics are about precision. It's the visual manifestation of code quality.",
+        "A premium interface should feel deliberate. Every pixel, every transition, every color choice must have a purpose."
+      ]
+    }
+  ]
+}

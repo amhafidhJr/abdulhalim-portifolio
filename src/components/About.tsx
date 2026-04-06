@@ -1,129 +1,133 @@
-import { Box } from "@mui/material";
 import React from "react";
-const profileImage = require("../assets/images/banner-img.jpg");
+import { Box, Typography, Button, Stack, Container } from "@mui/material";
+import { motion } from "framer-motion";
+import { ArrowRight, Mail } from "lucide-react";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 export const About = () => {
   return (
-    <section className="">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-12">
-            <Box
+    <Box 
+      component="section" 
+      sx={{ 
+        pt: { xs: 15, md: 25 }, 
+        pb: { xs: 10, md: 20 },
+        textAlign: "center"
+      }}
+    >
+      <Container maxWidth="md">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "circOut" }}
+        >
+          <Box 
+            sx={{ 
+              display: "inline-flex", 
+              alignItems: "center", 
+              gap: 1,
+              px: 2,
+              py: 0.5,
+              borderRadius: "100px",
+              border: "1px solid rgba(255,255,255,0.08)",
+              bgcolor: "rgba(255,255,255,0.02)",
+              mb: 4
+            }}
+          >
+            <Box sx={{ width: 6, height: 6, borderRadius: "50%", bgcolor: "#4ADE80" }} />
+            <Typography variant="caption" sx={{ fontWeight: 500, letterSpacing: 0.5, color: "#999" }}>
+              Currently shipping digital architectures
+            </Typography>
+          </Box>
+
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: { xs: "2.5rem", sm: "3.5rem", md: "4.5rem" },
+              fontWeight: 600,
+              lineHeight: 1.1,
+              mb: 3,
+              letterSpacing: "-0.04em",
+              color: "#fff"
+            }}
+          >
+            Senior Engineer <br />
+            <span style={{ color: "var(--text-muted)" }}>shaping the future of web.</span>
+          </Typography>
+
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: { xs: "1.1rem", md: "1.25rem" },
+              color: "var(--text-muted)",
+              maxWidth: "600px",
+              mx: "auto",
+              mb: 6,
+              lineHeight: 1.7,
+              fontWeight: 400,
+            }}
+          >
+            I'm Abdulhalim — specialize in building high-performance, secure, and 
+            technically precise web applications for modern enterprises.
+          </Typography>
+
+          <Stack 
+            direction={{ xs: "column", sm: "row" }} 
+            spacing={2} 
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Button
+              variant="contained"
               sx={{
-                border: "1px dashed #776B5D",
-                borderRadius: "4px",
-                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-                margin: "auto",
-                backgroundColor: "#ffffff",
-                padding: { xs: 1, sm: 2, md: 3 }, // Responsive padding
+                bgcolor: "white",
+                color: "black",
+                borderRadius: "12px",
+                px: 4,
+                py: 1.5,
+                textTransform: "none",
+                fontSize: "1rem",
+                fontWeight: 600,
+                '&:hover': { bgcolor: "#f0f0f0" },
+                transition: "all 0.2s ease"
               }}
+              endIcon={<ArrowRight size={18} />}
             >
-              <div className="row">
-                <div className="col-md-8 col-12">
-                  <Box
-                    component="section"
-                    sx={{
-                      p: { xs: 4, sm: 8, md: 12 }, // Responsive padding
-                      borderRadius: "4px",
-                      backgroundColor: "#f4f4f4",
-                      boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
-                      mt: 0,
-                      height: "100%",
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: { xs: "1.2rem", sm: "1.5rem" }, // Responsive font size
-                        marginBottom: "0.5rem",
-                        color: "#000",
-                      }}
-                    >
-                      Hi, I'm Abdulahlim Hafidh
-                    </p>
-
-                    <p
-                      style={{
-                        fontSize: { xs: "1rem", sm: "1.3rem" }, // Responsive font size
-                        marginBottom: "1rem",
-                        color: "#000",
-                      }}
-                    >
-                      A passionate{" "}
-                      <span style={{ color: "#333" }}>
-                        Full Stack Developer
-                      </span>{" "}
-                      and{" "}
-                      <span style={{ color: "#333" }}>
-                        Cybersecurity Enthusiast
-                      </span>
-                      .
-                    </p>
-
-                    <p
-                      style={{
-                        fontSize: { xs: "0.9rem", sm: "1.1rem" }, // Responsive font size
-                        lineHeight: "1.6",
-                        color: "#555",
-                        marginBottom: "1.5rem",
-                      }}
-                    >
-                      Focused on building{" "}
-                      <span style={{ color: "#333" }}>
-                        secure and scalable web applications
-                      </span>
-                      . Experienced in{" "}
-                      <span style={{ color: "#333" }}>
-                        JavaScript, Angular, React, Java, and Python
-                      </span>
-                      , creating efficient and user-friendly software solutions.
-                    </p>
-
-                    <p
-                      style={{
-                        fontSize: { xs: "1rem", sm: "1.2rem" }, // Responsive font size
-                        color: "#000",
-                      }}
-                    >
-                      Let's{" "}
-                      <a
-                        href="#contact"
-                        style={{
-                          color: "#000",
-                          textDecoration: "underline",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        connect
-                      </a>{" "}
-                      and create something amazing together!
-                    </p>
-                  </Box>
-                </div>
-                <div
-                  className="col-md-4 col-12"
-                  style={{
-                    height: { xs: "auto", md: "470px" }, // Adjust height for smaller screens
-                    overflow: "hidden",
+              Get in touch
+            </Button>
+            
+            <Stack direction="row" spacing={1}>
+              {[GitHubIcon, LinkedInIcon].map((Icon, i) => (
+                <Button
+                  key={i}
+                  sx={{ 
+                    minWidth: 48, 
+                    height: 48, 
+                    borderRadius: "12px", 
+                    border: "1px solid var(--border-hairline)",
+                    color: "var(--text-muted)",
+                    '&:hover': { color: "white", borderColor: "white" }
                   }}
                 >
-                  <img
-                    style={{
-                      boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
-                      opacity: "0.7",
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    src={profileImage}
-                    className="rounded"
-                    alt="Profile"
-                  />
-                </div>
-              </div>
-            </Box>
-          </div>
-        </div>
-      </div>
-    </section>
+                  <Icon sx={{ fontSize: 20 }} />
+                </Button>
+              ))}
+              <Button
+                  sx={{ 
+                    minWidth: 48, 
+                    height: 48, 
+                    borderRadius: "12px", 
+                    border: "1px solid var(--border-hairline)",
+                    color: "var(--text-muted)",
+                    '&:hover': { color: "white", borderColor: "white" }
+                  }}
+                >
+                  <Mail size={20} />
+                </Button>
+            </Stack>
+          </Stack>
+        </motion.div>
+      </Container>
+    </Box>
   );
 };

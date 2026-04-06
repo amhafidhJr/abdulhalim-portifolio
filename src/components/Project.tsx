@@ -1,172 +1,90 @@
 import React from "react";
-import Slider from "react-slick";
-import {
-  Card,
-  CardContent,
-  Typography,
-  CardMedia,
-  Box,
-  Button,
-} from "@mui/material";
-import Arrow from "@mui/icons-material/ArrowForward";
+import { Box, Typography, Container, Stack, IconButton } from "@mui/material";
+import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import db from "../data/db.json";
 
-// Sample data
-const cards = [
-  {
-    id: 1,
-    title: "MjasiriHub",
-    description: "Mobile Application",
-    image:
-      "https://pbs.twimg.com/profile_images/1138010883165212672/dQt_D4Le_400x400.jpg",
-  },
-  {
-    id: 2,
-    title: "Najah emarket",
-    description: "Web Application",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKX-YC029eL06ZQpZyBDTfEKpg4sPmzEDsBg&s",
-  },
-  {
-    id: 3,
-    title: "Inventory MS",
-    description: "Web Application",
-    image:
-      "https://st.depositphotos.com/1002927/1392/i/450/depositphotos_13927437-stock-illustration-check-pallet.jpg",
-  },
-  {
-    id: 4,
-    title: "Water Trucker",
-    description: "Mobile Application",
-    image:
-      "https://i.pinimg.com/736x/5b/14/4d/5b144d0812d45d1ee3d21b16f2c35501.jpg",
-  },
-  {
-    id: 5,
-    title: "AfyaTel Application",
-    description: "Mobile Application",
-    image:
-      "https://media.licdn.com/dms/image/C4D12AQFD7MrGSxtH3w/article-cover_image-shrink_600_2000/0/1615640906924?e=2147483647&v=beta&t=rzrU5WnMTsQZCw3rLLFm-hDJb6srAJYmB9QozK4mYq4",
-  },
-  {
-    id: 6,
-    title: "Laundry MS",
-    description: "Web Application",
-    image:
-      "https://5.imimg.com/data5/SELLER/Default/2023/10/353273028/FS/PR/MR/184325663/offsite-laundry-management-system-service-500x500.png",
-  },
-  // Add more cards as needed
-];
+const projects = db.projects;
 
-const Project = () => {
-  const settings = {
-    infinite: true,
-    centerMode: true,
-    speed: 2000,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
+export const Project = () => {
   return (
-    <div className="container mt-5 mb-5">
-      <div className="row">
-        <div className="col-12">
-          <Typography
-            variant="h4"
-            component="h4"
-            align="left"
-            gutterBottom
-            sx={{ mb: 4, fontWeight: "bold" }}
-          >
-            Projects
+    <Box component="section" id="work" sx={{ py: 15 }}>
+      <Container maxWidth="md">
+        <Box sx={{ mb: 10 }}>
+          <Typography variant="overline" sx={{ color: "var(--text-muted)", fontWeight: 600, letterSpacing: 2 }}>
+            COLLECTED WORKS
           </Typography>
+          <Typography variant="h2" sx={{ fontWeight: 600, mt: 1, letterSpacing: -2 }}>
+            Engineering precision.
+          </Typography>
+        </Box>
 
-          <Box
-            sx={{
-              border: "0px solid #776B5D", // Corrected border style
-              borderRadius: "10px",
-              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-              margin: "auto",
-              backgroundColor: "#F9F9F9",
-              padding: { xs: 2, sm: 3, md: 4 }, // Responsive padding
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Box
-              sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}
+        <Stack spacing={8}>
+          {projects.map((project, idx) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.8, ease: "circOut" }}
             >
-              <Typography variant="h6" color="error">
-                Click card to view Project
-              </Typography>
-              <Button
-                variant="outlined"
-                endIcon={<Arrow />}
+              <Box
+                className="hairline-card"
                 sx={{
-                  border: "1px solid #776B5D",
-                  color: "#776B5D",
-                  borderRadius: "8px",
-                  fontSize: { xs: "0.75rem", sm: "0.875rem" }, // Responsive font size
+                  p: 0,
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  "&:hover .project-image": { transform: "scale(1.04)" }
                 }}
-                size="medium"
-                className="mb-3"
               >
-                View More
-              </Button>
-            </Box>
-            <Slider {...settings}>
-              {cards.map((card) => (
-                <Card
-                  key={card.id}
-                  sx={{
-                    maxWidth: 300,
-                    margin: "0 auto",
-                    padding: 1,
-                    // Responsive card width
-                    width: { xs: "90%", sm: "80%", md: "100%" },
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    height="200" // Fixed height to maintain aspect ratio
-                    image={card.image}
-                    alt={card.title}
+                <Box sx={{ flex: 1.2, p: 5, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <Typography variant="caption" sx={{ color: "var(--text-muted)", fontWeight: 600, mb: 1 }}>
+                    {project.subtitle}
+                  </Typography>
+                  <Typography variant="h4" sx={{ fontWeight: 600, mb: 2 }}>{project.title}</Typography>
+                  <Typography variant="body2" sx={{ color: "var(--text-muted)", mb: 4, lineHeight: 1.8 }}>
+                    {project.description}
+                  </Typography>
+                  
+                  <Stack direction="row" spacing={3} alignItems="center">
+                    <Stack direction="row" spacing={1.5} flexWrap="wrap">
+                      {project.tech.map(t => (
+                        <Typography key={t} sx={{ fontSize: "0.7rem", color: "#fff", opacity: 0.5 }}>{t}</Typography>
+                      ))}
+                    </Stack>
+                    <Box sx={{ width: 1, height: 12, bgcolor: "var(--border-hairline)" }} />
+                    <Stack direction="row" spacing={1}>
+                      <IconButton size="small" href={project.github} target="_blank" sx={{ color: "var(--text-muted)", '&:hover': { color: "#fff" } }}>
+                        <GitHubIcon sx={{ fontSize: 18 }} />
+                      </IconButton>
+                      <IconButton size="small" href={project.demo} target="_blank" sx={{ color: "var(--text-muted)", '&:hover': { color: "#fff" } }}>
+                        <ExternalLink size={18} />
+                      </IconButton>
+                    </Stack>
+                  </Stack>
+                </Box>
+
+                <Box sx={{ flex: 1, position: "relative", overflow: "hidden", minHeight: 300 }}>
+                  <img 
+                    className="project-image"
+                    src={project.image} 
+                    alt={project.title}
+                    style={{ 
+                      width: "100%", 
+                      height: "100%", 
+                      objectFit: "cover",
+                      transition: "transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)"
+                    }}
                   />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
-                      {card.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {card.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              ))}
-            </Slider>
-          </Box>
-        </div>
-      </div>
-    </div>
+                </Box>
+              </Box>
+            </motion.div>
+          ))}
+        </Stack>
+      </Container>
+    </Box>
   );
 };
 

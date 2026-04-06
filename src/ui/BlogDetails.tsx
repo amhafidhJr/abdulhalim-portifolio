@@ -1,16 +1,17 @@
 import React from "react";
+import { Box } from "@mui/material";
 import { AppBarUI } from "../components/AppBar.tsx";
 import { Footer } from "../components/Footer.tsx";
-import BlogPostDetails from "../components/BlogDetails.tsx";
+import { BlogDetails } from "../components/BlogDetails.tsx";
 
 export const MainBlogDetails = () => {
   return (
-    <>
-      <AppBarUI></AppBarUI>
-      <div className="container mt-5 mb-5">
-        <BlogPostDetails></BlogPostDetails>
-      </div>
-      <Footer></Footer>
-    </>
+    <Box sx={{ minHeight: "100vh", bgcolor: "var(--bg-onyx)" }}>
+      <AppBarUI />
+      <Box component="main">
+        <BlogDetails />
+      </Box>
+      <Footer />
+    </Box>
   );
 };

@@ -4,6 +4,10 @@ import {
   Alert,
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   IconButton,
   Snackbar,
   TextField,
@@ -11,22 +15,17 @@ import {
   Container,
   Stack,
 } from "@mui/material";
-import { Search, Edit, Trash2, ArrowLeft, Plus } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Search, Eye, Trash2, ArrowLeft, Mail } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Message } from "../interfaces/Message";
 
-interface BlogPost {
-  id: string;
-  title: string | null;
-  readTime: string | null;
-  excerpt: string | null;
-}
-
-export const PostList = () => {
+export const MessageList = () => {
   const navigate = useNavigate();
   const columns: GridColDef[] = [
-    { field: "title", headerName: "Title", flex: 1 },
-    { field: "readTime", headerName: "Read Time", width: 150 },
+    { field: "fullname", headerName: "Name", flex: 1 },
+    { field: "email", headerName: "Email", width: 250 },
+    { field: "phone", headerName: "Phone", width: 200 },
     {
       field: "actions",
       headerName: "Actions",
@@ -36,9 +35,9 @@ export const PostList = () => {
           <IconButton
             size="small"
             sx={{ color: "var(--text-muted)", "&:hover": { color: "#fff" } }}
-            onClick={() => navigate(`/post-form?id=${params.row.id}`)}
+            onClick={() => handleViewMessage(params.row)}
           >
-            <Edit size={18} />
+            <Eye size={18} />
           </IconButton>
           <IconButton
             size="small"
@@ -52,30 +51,37 @@ export const PostList = () => {
     },
   ];
 
-  const [rows, setRows] = useState<BlogPost[]>([]);
+  const [rows, setRows] = useState<Message[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedMessage, setSelectedMessage] = useState<string | null>(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">("success");
+  const [openDialog, setOpenDialog] = useState(false);
 
   const filteredRows = rows.filter((row) =>
-    (row.title || "").toLowerCase().includes(searchQuery.toLowerCase())
+    `${row.fullname || ""} ${row.email || ""}`.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/blogs");
+      const response = await axios.get("http://localhost:5000/mail");
       setRows(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleDelete = async (row: BlogPost) => {
-    if (window.confirm("Delete this post permanently?")) {
+  const handleViewMessage = (row: Message) => {
+    setSelectedMessage(row.message);
+    setOpenDialog(true);
+  };
+
+  const handleDelete = async (row: Message) => {
+    if (window.confirm("Delete this message?")) {
       try {
-        await axios.delete(`http://localhost:5000/blogs/${row.id}`);
-        setSnackbarMessage("Post deleted successfully.");
+        await axios.delete(`http://localhost:5000/mail/${row.id}`);
+        setSnackbarMessage("Message deleted.");
         setSnackbarSeverity("success");
         setOpenSnackbar(true);
         fetchData();
@@ -102,37 +108,19 @@ export const PostList = () => {
           Back to Dashboard
         </Button>
 
-        <Stack direction="row" justifyContent="space-between" alignItems="flex-end" sx={{ mb: 6 }}>
-          <Box>
-            <Typography variant="overline" sx={{ color: "var(--text-muted)", fontWeight: 600, letterSpacing: 2 }}>
-              CONTENT MANAGEMENT
-            </Typography>
-            <Typography variant="h3" sx={{ color: "#fff", fontWeight: 600, letterSpacing: -1 }}>
-              Blog Posts.
-            </Typography>
-          </Box>
-          <Button
-            component={Link}
-            to="/post-form"
-            variant="contained"
-            startIcon={<Plus size={18} />}
-            sx={{
-              bgcolor: "#fff",
-              color: "#000",
-              fontWeight: 600,
-              borderRadius: "12px",
-              px: 3,
-              "&:hover": { bgcolor: "rgba(255,255,255,0.9)" }
-            }}
-          >
-            New Post
-          </Button>
-        </Stack>
+        <Box sx={{ mb: 6 }}>
+          <Typography variant="overline" sx={{ color: "var(--text-muted)", fontWeight: 600, letterSpacing: 2 }}>
+            INBOUND COMMUNICATIONS
+          </Typography>
+          <Typography variant="h3" sx={{ color: "#fff", fontWeight: 600, letterSpacing: -1 }}>
+            Client Messages.
+          </Typography>
+        </Box>
 
         <Box sx={{ mb: 4 }}>
           <TextField
             fullWidth
-            placeholder="Search articles..."
+            placeholder="Search messages..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             InputProps={{
@@ -161,6 +149,37 @@ export const PostList = () => {
             disableRowSelectionOnClick
           />
         </Box>
+
+        <Dialog
+          open={openDialog}
+          onClose={() => setOpenDialog(false)}
+          PaperProps={{
+            sx: {
+              bgcolor: "var(--bg-surface)",
+              color: "#fff",
+              borderRadius: "24px",
+              border: "1px solid var(--border-hairline)",
+              p: 2
+            }
+          }}
+        >
+          <DialogTitle sx={{ fontWeight: 600, display: "flex", alignItems: "center", gap: 1.5 }}>
+            <Mail size={20} /> Message Content
+          </DialogTitle>
+          <DialogContent>
+            <Typography variant="body1" sx={{ color: "rgba(255,255,255,0.7)", lineHeight: 1.8 }}>
+              {selectedMessage}
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button 
+              onClick={() => setOpenDialog(false)}
+              sx={{ color: "#fff", fontWeight: 600 }}
+            >
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
 
         <Snackbar
           open={openSnackbar}

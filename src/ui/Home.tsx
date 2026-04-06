@@ -4,21 +4,20 @@ import { About } from "../components/About.tsx";
 import Project from "../components/Project.tsx";
 import { Skills } from "../components/Skills.tsx";
 import { Footer } from "../components/Footer.tsx";
+import { Box, Container } from "@mui/material";
 
 export const Home = () => {
   return (
-    <>
-      <AppBarUI></AppBarUI>
+    <Box sx={{ minHeight: "100vh", bgcolor: "var(--bg-onyx)" }}>
+      <AppBarUI />
+      
+      <Box component="main">
+        <About />
+        <Skills />
+        <Project />
+      </Box>
 
-      <div className="container mt-5 mb-5">
-        <About></About>
-        <Skills></Skills>
-        <Project></Project>
-
-        {/* <Blog></Blog> */}
-        {/* <BlogPost></BlogPost> */}
-        <Footer></Footer>
-      </div>
-    </>
+      <Footer />
+    </Box>
   );
 };

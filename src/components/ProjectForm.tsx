@@ -6,25 +6,24 @@ import {
   Box,
   Container,
   Stack,
-  IconButton,
   Snackbar,
   Alert,
 } from "@mui/material";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Save, FileText } from "lucide-react";
+import { ArrowLeft, Save, FolderKanban } from "lucide-react";
 
-export const BlogPostForm = () => {
+export const ProjectForm = () => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
     title: "",
-    excerpt: "",
-    readTime: "",
-    content: "", // Will be split into array
-    author: "Abdulhalim Hafidh",
-    date: format(new Date(), "MMM dd, yyyy"),
+    subtitle: "",
+    description: "",
+    image: "",
+    tech: "", // Comma separated
+    github: "",
+    demo: "",
   });
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -41,18 +40,18 @@ export const BlogPostForm = () => {
     const payload = {
       id: uuidv4(),
       ...formState,
-      content: formState.content.split("\n\n").filter(p => p.trim() !== ""),
+      tech: formState.tech.split(",").map(t => t.trim()).filter(t => t !== ""),
     };
 
     try {
-      await axios.post("http://localhost:5000/blogs", payload);
-      setSnackbarMessage("Blog post published successfully!");
+      await axios.post("http://localhost:5000/projects", payload);
+      setSnackbarMessage("Project added to gallery successfully!");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
       setTimeout(() => navigate("/dashboard"), 2000);
     } catch (error) {
       console.error(error);
-      setSnackbarMessage("Publication failed. Ensure server is running.");
+      setSnackbarMessage("Failed to save. Ensure server is running.");
       setSnackbarSeverity("error");
       setOpenSnackbar(true);
     }
@@ -71,19 +70,19 @@ export const BlogPostForm = () => {
 
         <Box sx={{ mb: 6 }}>
           <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 1 }}>
-            <FileText size={20} style={{ color: "var(--text-muted)" }} />
+            <FolderKanban size={20} style={{ color: "var(--text-muted)" }} />
             <Typography variant="overline" sx={{ color: "var(--text-muted)", fontWeight: 600, letterSpacing: 2 }}>
-              CONTENT CREATION
+              GALLERY MANAGEMENT
             </Typography>
           </Stack>
           <Typography variant="h3" sx={{ color: "#fff", fontWeight: 600, letterSpacing: -1 }}>
-            New Blog Post.
+            New Project.
           </Typography>
         </Box>
 
         <Stack component="form" onSubmit={handleSubmit} spacing={4}>
           <TextField
-            label="Post Title"
+            label="Project Title"
             name="title"
             required
             fullWidth
@@ -92,33 +91,56 @@ export const BlogPostForm = () => {
             className="premium-input"
           />
           <TextField
-            label="Read Time (e.g., 5 min)"
-            name="readTime"
+            label="Subtitle / Category (e.g., Mobile App)"
+            name="subtitle"
             required
             fullWidth
-            value={formState.readTime}
+            value={formState.subtitle}
             onChange={handleChange}
             className="premium-input"
           />
           <TextField
-            label="Short Excerpt"
-            name="excerpt"
+            label="Image URL"
+            name="image"
             required
             fullWidth
-            multiline
-            rows={2}
-            value={formState.excerpt}
+            value={formState.image}
             onChange={handleChange}
             className="premium-input"
           />
           <TextField
-            label="Content (Use double return for paragraphs)"
-            name="content"
+            label="Tech Stack (comma separated)"
+            name="tech"
+            required
+            fullWidth
+            value={formState.tech}
+            onChange={handleChange}
+            className="premium-input"
+          />
+          <TextField
+            label="GitHub URL"
+            name="github"
+            fullWidth
+            value={formState.github}
+            onChange={handleChange}
+            className="premium-input"
+          />
+          <TextField
+            label="Demo URL"
+            name="demo"
+            fullWidth
+            value={formState.demo}
+            onChange={handleChange}
+            className="premium-input"
+          />
+          <TextField
+            label="Project Description"
+            name="description"
             required
             fullWidth
             multiline
-            rows={10}
-            value={formState.content}
+            rows={4}
+            value={formState.description}
             onChange={handleChange}
             className="premium-input"
           />
@@ -137,7 +159,7 @@ export const BlogPostForm = () => {
               "&:hover": { bgcolor: "rgba(255,255,255,0.9)" }
             }}
           >
-            Publish Article
+            Add to Gallery
           </Button>
         </Stack>
 

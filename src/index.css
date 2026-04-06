@@ -1,13 +1,154 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* True Premium Achromatic Palette */
+  --bg-onyx: #080808 !important;
+  --bg-surface: #111111 !important;
+  --primary: #ffffff !important;
+  --text-main: #f5f5f7 !important;
+  --text-muted: #86868b !important;
+  --border-hairline: rgba(255, 255, 255, 0.08) !important;
+  --accent-glow: rgba(255, 255, 255, 0.05) !important;
+  
+  /* Precision Spacing */
+  --space-unit: 8px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Inter', sans-serif !important;
+}
+
+html, body {
+  background-color: #080808 !important;
+  color: #f5f5f7 !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  overflow-x: hidden;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Subtle Top Glow */
+body::before {
+  content: "";
+  position: fixed;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 40%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.03) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: #fff !important;
+}
+
+.text-subtle {
+  color: var(--text-muted) !important;
+}
+
+/* Premium Components */
+.hairline-card {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-hairline) !important;
+  border-radius: 24px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hairline-card:hover {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  background: #141414 !important;
+}
+
+/* Section Spacing */
+section {
+  padding: 120px 0;
+}
+
+.container-narrow {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Custom Scrollbar - Ultra Minimal */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Premium Form Inputs */
+.premium-input {
+  margin-bottom: 24px !important;
+}
+
+.premium-input .MuiOutlinedInput-root {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  transition: 0.3s !important;
+}
+
+.premium-input .MuiOutlinedInput-notchedOutline {
+  border-color: var(--border-hairline) !important;
+}
+
+.premium-input .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.premium-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #fff !important;
+  border-width: 1px !important;
+}
+
+.premium-input .MuiInputLabel-root {
+  color: var(--text-muted) !important;
+}
+
+.premium-input .MuiInputLabel-root.Mui-focused {
+  color: #fff !important;
+}
+
+.premium-input .MuiInputBase-input::placeholder {
+  color: rgba(255, 255, 255, 0.2) !important;
+  opacity: 1;
+}
+
+/* Utility Animations */
+.fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
