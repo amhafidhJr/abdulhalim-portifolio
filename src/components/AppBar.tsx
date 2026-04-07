@@ -4,8 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu as MenuIcon, X, User } from "lucide-react";
 
-// Your brand image
-const Brand = require("../assets/images/brand.png");
+
 
 const pages = [
   { name: "Home", path: "/" },

@@ -4,7 +4,7 @@ import { About } from "../components/About.tsx";
 import Project from "../components/Project.tsx";
 import { Skills } from "../components/Skills.tsx";
 import { Footer } from "../components/Footer.tsx";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 
 export const Home = () => {
   return (

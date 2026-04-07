@@ -1,12 +1,8 @@
 import React from "react";
 import { Box, Typography, Container, Grid, Stack } from "@mui/material";
 import { 
-  Code2, 
-  Terminal, 
-  Globe, 
   Layers, 
   ShieldCheck, 
-  Smartphone,
   Server
 } from "lucide-react";
 
